@@ -1,1 +1,148 @@
- 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cristian Palomeque — Blog de programación</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav>
+    <div class="logo">&lt;devlog /&gt;</div>
+    <ul>
+      <li><a href="#">Proyectos</a></li>
+      <li><a href="#">Aprendizaje</a></li>
+      <li><a href="#">Snippets</a></li>
+      <li><a href="#">Sobre mí</a></li>
+    </ul>
+    <span class="badge">🟢 Disponible para colaborar</span>
+  </nav>
+
+  <section class="hero">
+    <span class="hero-tag">Blog de programación</span>
+    <h1>Aprendo en público.<br>Construyo en <em>serio.</em></h1>
+    <p>Soy estudiante de programación compartiendo proyectos, errores y todo lo que aprendo en el camino. Para principiantes como yo.</p>
+    <div class="stats">
+      <div class="stat"><span class="num">12</span><span class="label">Posts</span></div>
+      <div class="stat"><span class="num">4</span><span class="label">Proyectos</span></div>
+      <div class="stat"><span class="num">3</span><span class="label">Meses activo</span></div>
+    </div>
+  </section>
+
+  <div class="main">
+
+    <section class="feed">
+
+      <div class="section-header">
+        <span class="section-title">// Último post</span>
+      </div>
+
+      <div class="post-featured">
+        <div class="post-meta">
+          <span class="tag tag-proyecto">PROYECTO</span>
+          <span class="fecha">15 mar 2026</span>
+        </div>
+        <h2>Construí una app de lista de tareas con JavaScript vanilla — sin frameworks</h2>
+        <p>Mi primer proyecto "real". Quería entender el DOM antes de saltar a React. Aprendí sobre eventos, localStorage y por qué los nombres de variables importan.</p>
+        <div class="code-peek">
+          <span class="cm">// Guardar en localStorage</span><br>
+          <span class="kw">function</span> <span class="fn">saveTasks</span>(tasks) {<br>
+          &nbsp;&nbsp;localStorage.<span class="fn">setItem</span>(<span class="st">'tasks'</span>, JSON.<span class="fn">stringify</span>(tasks));<br>
+          }
+        </div>
+        <div class="post-footer">
+          <span class="read-time">⏱ 5 min lectura</span>
+          <a href="#" class="leer-mas">Leer más →</a>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top: 32px;">
+        <span class="section-title">// Posts recientes</span>
+        <a href="#" class="ver-todos">ver todos →</a>
+      </div>
+
+      <div class="post-list">
+        <div class="post-item">
+          <span class="post-num">02</span>
+          <div class="post-info">
+            <h3>Por qué me rompió la cabeza el `this` en JavaScript</h3>
+            <div class="post-item-meta">
+              <span class="tag tag-error">ERROR</span>
+              <span class="fecha">10 mar 2026</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-item">
+          <span class="post-num">03</span>
+          <div class="post-info">
+            <h3>Log semanal #4 — Entendí los flexbox layouts por fin</h3>
+            <div class="post-item-meta">
+              <span class="tag tag-log">LOG</span>
+              <span class="fecha">5 mar 2026</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-item">
+          <span class="post-num">04</span>
+          <div class="post-info">
+            <h3>Snippet: función para formatear fechas sin librerías</h3>
+            <div class="post-item-meta">
+              <span class="tag tag-snippet">SNIPPET</span>
+              <span class="fecha">28 feb 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <aside class="sidebar">
+
+      <div class="sidebar-block">
+        <div class="sidebar-title">// autor</div>
+        <div class="profile">
+          <div class="avatar">C</div>
+          <div>
+            <div class="profile-name">Cristian Palomeque</div>
+            <p class="profile-desc">Estudiante de programación. Aprendo haciendo y escribo sobre eso. Medellín 🇨🇴</p>
+          </div>
+          <div class="stack">
+            <span class="pill">JavaScript</span>
+            <span class="pill">HTML/CSS</span>
+            <span class="pill">Git</span>
+            <span class="pill">Python</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-title">// temas</div>
+        <div class="topics">
+          <div class="topic"><span>Proyectos</span><span class="count">4 posts</span></div>
+          <div class="topic"><span>Logs semanales</span><span class="count">5 posts</span></div>
+          <div class="topic"><span>Errores y fixes</span><span class="count">2 posts</span></div>
+          <div class="topic"><span>Snippets</span><span class="count">1 post</span></div>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-title">// newsletter</div>
+        <p class="nl-text">Cada semana un post nuevo. Sin spam, solo código y aprendizajes.</p>
+        <div class="nl-form">
+          <input type="email" placeholder="tu@email.com" class="nl-input">
+          <button class="nl-btn">SUSCRIBIRME</button>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <footer>
+    <p>Hecho con curiosidad por <strong>Cristian Palomeque</strong> · Medellín 🇨🇴</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

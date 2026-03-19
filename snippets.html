@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snippets — Cristian Palomeque</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/snippets.css">
+</head>
+<body>
+
+  <nav>
+    <div class="logo"><a href="index.html">&lt;devlog /&gt;</a></div>
+    <ul>
+      <li><a href="index.html#proyectos">Proyectos</a></li>
+      <li><a href="index.html#aprendizaje">Aprendizaje</a></li>
+      <li><a href="snippets.html" class="active">Snippets</a></li>
+      <li><a href="about.html">Sobre mí</a></li>
+    </ul>
+    <span class="badge">🟢 Disponible para colaborar</span>
+  </nav>
+
+  <div class="snippets-wrapper">
+
+    <!-- HEADER -->
+    <div class="snippets-header">
+      <span class="hero-tag">Snippets</span>
+      <h1>Código que <em>reutilizo</em></h1>
+      <p>Fragmentos pequeños pero útiles que guardo aquí para no olvidarlos. Cópialos libremente.</p>
+    </div>
+
+    <!-- FILTROS -->
+    <div class="filtros">
+      <button class="filtro active" data-filtro="todos">Todos</button>
+      <button class="filtro" data-filtro="javascript">JavaScript</button>
+      <button class="filtro" data-filtro="css">CSS</button>
+      <button class="filtro" data-filtro="html">HTML</button>
+    </div>
+
+    <!-- GRID DE SNIPPETS -->
+    <div class="snippets-grid">
+
+      <div class="snippet-card" data-categoria="javascript">
+        <div class="snippet-header">
+          <div>
+            <span class="snippet-titulo">Formatear fechas sin librerías</span>
+            <span class="snippet-lang lang-js">JavaScript</span>
+          </div>
+          <button class="copy-btn" onclick="copySnippet(this)">Copiar</button>
+        </div>
+        <p class="snippet-desc">Convierte un objeto Date a formato legible en español sin usar moment.js ni date-fns.</p>
+        <pre class="snippet-code"><code><span class="kw">function</span> <span class="fn">formatDate</span>(date) {
+  <span class="kw">return new</span> Date(date).<span class="fn">toLocaleDateString</span>(<span class="st">'es-CO'</span>, {
+    year: <span class="st">'numeric'</span>,
+    month: <span class="st">'long'</span>,
+    day: <span class="st">'numeric'</span>
+  });
+}
+
+<span class="cm">// Uso:</span>
+<span class="fn">formatDate</span>(<span class="st">'2026-03-15'</span>); <span class="cm">// "15 de marzo de 2026"</span></code></pre>
+      </div>
+
+      <div class="snippet-card" data-categoria="javascript">
+        <div class="snippet-header">
+          <div>
+            <span class="snippet-titulo">Debounce para inputs</span>
+            <span class="snippet-lang lang-js">JavaScript</span>
+          </div>
+          <button class="copy-btn" onclick="copySnippet(this)">Copiar</button>
+        </div>
+        <p class="snippet-desc">Evita que una función se ejecute demasiado rápido — útil para búsquedas en tiempo real.</p>
+        <pre class="snippet-code"><code><span class="kw">function</span> <span class="fn">debounce</span>(fn, delay) {
+  <span class="kw">let</span> timer;
+  <span class="kw">return function</span>(...args) {
+    <span class="fn">clearTimeout</span>(timer);
+    timer = <span class="fn">setTimeout</span>(() => <span class="fn">fn</span>(...args), delay);
+  };
+}
+
+<span class="cm">// Uso:</span>
+<span class="kw">const</span> buscar = <span class="fn">debounce</span>((q) => <span class="fn">console</span>.<span class="fn">log</span>(q), <span class="st">300</span>);
+input.<span class="fn">addEventListener</span>(<span class="st">'input'</span>, e => <span class="fn">buscar</span>(e.target.value));</code></pre>
+      </div>
+
+      <div class="snippet-card" data-categoria="javascript">
+        <div class="snippet-header">
+          <div>
+            <span class="snippet-titulo">Guardar y leer localStorage</span>
+            <span class="snippet-lang lang-js">JavaScript</span>
+          </div>
+          <button class="copy-btn" onclick="copySnippet(this)">Copiar</button>
+        </div>
+        <p class="snippet-desc">Wrapper simple para guardar y leer objetos en localStorage sin acordarse del JSON.</p>
+        <pre class="snippet-code"><code><span class="kw">const</span> storage = {
+  <span class="fn">set</span>(key, value) {
+    localStorage.<span class="fn">setItem</span>(key, JSON.<span class="fn">stringify</span>(value));
+  },
+  <span class="fn">get</span>(key) {
+    <span class="kw">const</span> item = localStorage.<span class="fn">getItem</span>(key);
+    <span class="kw">return</span> item ? JSON.<span class="fn">parse</span>(item) : <span class="kw">null</span>;
+  },
+  <span class="fn">remove</span>(key) {
+    localStorage.<span class="fn">removeItem</span>(key);
+  }
+};
+
+<span class="cm">// Uso:</span>
+storage.<span class="fn">set</span>(<span class="st">'usuario'</span>, { nombre: <span class="st">'Cristian'</span> });
+storage.<span class="fn">get</span>(<span class="st">'usuario'</span>); <span class="cm">// { nombre: 'Cristian' }</span></code></pre>
+      </div>
+
+      <div class="snippet-card" data-categoria="css">
+        <div class="snippet-header">
+          <div>
+            <span class="snippet-titulo">Centrar con flexbox</span>
+            <span class="snippet-lang lang-css">CSS</span>
+          </div>
+          <button class="copy-btn" onclick="copySnippet(this)">Copiar</button>
+        </div>
+        <p class="snippet-desc">La forma más rápida de centrar cualquier elemento horizontal y verticalmente.</p>
+        <pre class="snippet-code"><code><span class="fn">.centrado</span> {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+<span class="cm">/* Centrar en toda la pantalla */</span>
+<span class="fn">.pantalla-completa</span> {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}</code></pre>
+      </div>
+
+      <div class="snippet-card" data-categoria="css">
+        <div class="snippet-header">
+          <div>
+            <span class="snippet-titulo">Truncar texto con puntos suspensivos</span>
+            <span class="snippet-lang lang-css">CSS</span>
+          </div>
+          <button class="copy-btn" onclick="copySnippet(this)">Copiar</button>
+        </div>
+        <p class="snippet-desc">Corta el texto que no cabe en una línea y agrega "..." al final automáticamente.</p>
+        <pre class="snippet-code"><code><span class="cm">/* Una línea */</span>
+<span class="fn">.truncar</span> {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+<span class="cm">/* Múltiples líneas (ej: 3) */</span>
+<span class="fn">.truncar-3</span> {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}</code></pre>
+      </div>
+
+      <div class="snippet-card" data-categoria="html">
+        <div class="snippet-header">
+          <div>
+            <span class="snippet-titulo">Plantilla HTML base</span>
+            <span class="snippet-lang lang-html">HTML</span>
+          </div>
+          <button class="copy-btn" onclick="copySnippet(this)">Copiar</button>
+        </div>
+        <p class="snippet-desc">El esqueleto mínimo que uso para empezar cualquier página nueva.</p>
+        <pre class="snippet-code"><code>&lt;!DOCTYPE html&gt;
+&lt;<span class="fn">html</span> lang=<span class="st">"es"</span>&gt;
+&lt;<span class="fn">head</span>&gt;
+  &lt;<span class="fn">meta</span> charset=<span class="st">"UTF-8"</span>&gt;
+  &lt;<span class="fn">meta</span> name=<span class="st">"viewport"</span>
+    content=<span class="st">"width=device-width, initial-scale=1.0"</span>&gt;
+  &lt;<span class="fn">title</span>&gt;Mi página&lt;/<span class="fn">title</span>&gt;
+  &lt;<span class="fn">link</span> rel=<span class="st">"stylesheet"</span> href=<span class="st">"style.css"</span>&gt;
+&lt;/<span class="fn">head</span>&gt;
+&lt;<span class="fn">body</span>&gt;
+
+  &lt;<span class="fn">script</span> src=<span class="st">"main.js"</span>&gt;&lt;/<span class="fn">script</span>&gt;
+&lt;/<span class="fn">body</span>&gt;
+&lt;/<span class="fn">html</span>&gt;</code></pre>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>Hecho con curiosidad por <strong>Cristian Palomeque</strong> · Medellín 🇨🇴</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Copiar snippet
+    function copySnippet(btn) {
+      const code = btn.closest('.snippet-card').querySelector('code').innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = '¡Copiado!';
+      btn.classList.add('copiado');
+      setTimeout(() => {
+        btn.textContent = 'Copiar';
+        btn.classList.remove('copiado');
+      }, 2000);
+    }
+
+    // Filtrar por categoría
+    const filtros = document.querySelectorAll('.filtro');
+    const cards = document.querySelectorAll('.snippet-card');
+
+    filtros.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filtros.forEach(f => f.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filtro = btn.dataset.filtro;
+        cards.forEach(card => {
+          if (filtro === 'todos' || card.dataset.categoria === filtro) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

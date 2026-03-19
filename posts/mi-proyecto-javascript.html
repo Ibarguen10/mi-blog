@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App de tareas con JavaScript vanilla — Cristian Palomeque</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/post.css">
+</head>
+<body>
+
+  <nav>
+    <div class="logo"><a href="../index.html">&lt;devlog /&gt;</a></div>
+    <ul>
+      <li><a href="../index.html#proyectos">Proyectos</a></li>
+      <li><a href="../index.html#aprendizaje">Aprendizaje</a></li>
+      <li><a href="../index.html#snippets">Snippets</a></li>
+      <li><a href="../about.html">Sobre mí</a></li>
+    </ul>
+    <span class="badge">🟢 Disponible para colaborar</span>
+  </nav>
+
+  <article class="post-wrapper">
+
+    <!-- CABECERA -->
+    <header class="post-header">
+      <a href="../index.html" class="post-back">← Volver al inicio</a>
+      <div class="post-meta">
+        <span class="tag tag-proyecto">PROYECTO</span>
+        <span class="fecha">15 mar 2026</span>
+        <span class="read-time">⏱ 5 min lectura</span>
+      </div>
+      <h1>Construí una app de lista de tareas con JavaScript vanilla — sin frameworks</h1>
+      <p class="post-subtitle">Mi primer proyecto "real". Quería entender el DOM antes de saltar a React.</p>
+    </header>
+
+    <!-- CONTENIDO -->
+    <div class="post-content">
+
+      <h2>¿Por qué este proyecto?</h2>
+      <p>Llevaba semanas aprendiendo JavaScript con tutoriales y ejercicios, pero sentía que no había construido nada real. Decidí hacer una app de tareas — simple, clásica, pero mía.</p>
+      <p>La regla que me puse: nada de frameworks, nada de librerías. Solo HTML, CSS y JavaScript puro.</p>
+
+      <h2>Lo que aprendí</h2>
+      <p>Este proyecto me enseñó tres cosas que ningún tutorial me había dejado claro:</p>
+
+      <ul>
+        <li>Cómo manipular el DOM con <code>querySelector</code> y <code>createElement</code></li>
+        <li>Cómo escuchar eventos con <code>addEventListener</code></li>
+        <li>Cómo guardar datos en <code>localStorage</code> para que no se pierdan al recargar</li>
+      </ul>
+
+      <h2>El código</h2>
+      <p>La función más importante del proyecto fue <code>saveTasks()</code> — guarda las tareas en el navegador:</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>js/main.js</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+        </div>
+        <pre><code><span class="cm">// Guardar tareas en localStorage</span>
+<span class="kw">function</span> <span class="fn">saveTasks</span>(tasks) {
+  localStorage.<span class="fn">setItem</span>(<span class="st">'tasks'</span>, JSON.<span class="fn">stringify</span>(tasks));
+}
+
+<span class="cm">// Cargar tareas al iniciar</span>
+<span class="kw">function</span> <span class="fn">loadTasks</span>() {
+  <span class="kw">const</span> saved = localStorage.<span class="fn">getItem</span>(<span class="st">'tasks'</span>);
+  <span class="kw">return</span> saved ? JSON.<span class="fn">parse</span>(saved) : [];
+}
+
+<span class="cm">// Agregar nueva tarea</span>
+<span class="kw">function</span> <span class="fn">addTask</span>(text) {
+  <span class="kw">const</span> tasks = <span class="fn">loadTasks</span>();
+  tasks.<span class="fn">push</span>({ id: Date.<span class="fn">now</span>(), text, done: <span class="kw">false</span> });
+  <span class="fn">saveTasks</span>(tasks);
+  <span class="fn">renderTasks</span>();
+}</code></pre>
+      </div>
+
+      <h2>El error que más me costó</h2>
+      <p>Estuve 2 horas confundido porque mis tareas desaparecían al recargar la página. El problema era que estaba guardando el array directamente:</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>❌ Incorrecto</span>
+        </div>
+        <pre><code>localStorage.<span class="fn">setItem</span>(<span class="st">'tasks'</span>, tasks); <span class="cm">// guarda "[object Object]"</span></code></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span>✅ Correcto</span>
+        </div>
+        <pre><code>localStorage.<span class="fn">setItem</span>(<span class="st">'tasks'</span>, JSON.<span class="fn">stringify</span>(tasks)); <span class="cm">// guarda el JSON real</span></code></pre>
+      </div>
+
+      <p>Esa diferencia entre un objeto y su representación en texto me enseñó más sobre JavaScript que cualquier tutorial.</p>
+
+      <h2>Próximo paso</h2>
+      <p>Quiero agregar categorías a las tareas y un filtro por estado. También voy a intentar reescribirlo con React para ver qué tan diferente es el proceso.</p>
+
+      <div class="post-tags">
+        <span class="tag tag-proyecto">PROYECTO</span>
+        <span class="tag tag-snippet">JavaScript</span>
+        <span class="tag tag-log">localStorage</span>
+      </div>
+
+    </div>
+
+    <!-- NAVEGACIÓN ENTRE POSTS -->
+    <nav class="post-nav">
+      <span></span>
+      <a href="../index.html" class="post-nav-link">Ver todos los posts →</a>
+    </nav>
+
+  </article>
+
+  <footer>
+    <p>Hecho con curiosidad por <strong>Cristian Palomeque</strong> · Medellín 🇨🇴</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    function copyCode(btn) {
+      const code = btn.closest('.code-block').querySelector('code').innerText;
+      navigator.clipboard.writeText(code);
+      btn.textContent = '¡Copiado!';
+      setTimeout(() => btn.textContent = 'Copiar', 2000);
+    }
+  </script>
+</body>
+</html>
